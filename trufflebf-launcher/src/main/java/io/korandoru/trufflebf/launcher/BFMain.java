@@ -18,7 +18,8 @@ public class BFMain {
                 .out(System.out)
                 .build();
         try (context) {
-            final Value result = context.eval(source);
+            final Value state = context.eval(source);
+            final Value result = state.execute();
             System.out.println(result);
         }
     }

@@ -17,6 +17,6 @@ public class BFRootNode extends RootNode {
 
     @Override
     public Object execute(VirtualFrame frame) {
-        return this.instructions;
+        return new BFState(this.instructions);
     }
 }
