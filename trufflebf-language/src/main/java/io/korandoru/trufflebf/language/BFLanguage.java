@@ -30,7 +30,8 @@ public class BFLanguage extends TruffleLanguage<Object> {
     }
 
     @Override
-    protected CallTarget parse(ParsingRequest request) throws Exception {
-        return super.parse(request);
+    protected CallTarget parse(ParsingRequest request) {
+        final BFRootNode node = new BFRootNode(this, request.getSource());
+        return node.getCallTarget();
     }
 }

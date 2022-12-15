@@ -19,7 +19,7 @@ public class BFMain {
                 .build();
         try (context) {
             final Value result = context.eval(source);
-            result.execute(new long[1024], 0);
+            System.out.println(result);
         }
     }
 
