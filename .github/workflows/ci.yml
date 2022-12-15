@@ -16,7 +16,9 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
   schedule:
     - cron: '2 4 * * *'
 
@@ -47,7 +49,7 @@ jobs:
 
   build:
     if: (github.event_name != 'schedule') || (github.repository == 'korandoru/trufflebf')
-    name: Check code style
+    name: Build natives and check
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -60,3 +62,5 @@ jobs:
           components: 'native-image'
       - name: Build natives
         run: mvn clean package -DskipTests
+      - name: Check natives
+        run: ./trufflebf-native/bfnative examples/helloworld.bf
