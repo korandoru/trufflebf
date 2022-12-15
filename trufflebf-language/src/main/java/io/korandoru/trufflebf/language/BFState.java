@@ -8,12 +8,20 @@ import com.oracle.truffle.api.interop.TruffleObject;
 import com.oracle.truffle.api.interop.UnsupportedMessageException;
 import com.oracle.truffle.api.library.ExportLibrary;
 import com.oracle.truffle.api.library.ExportMessage;
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.Map;
 
 @ExportLibrary(InteropLibrary.class)
 public class BFState implements TruffleObject {
 
     // code segment
+    private final Map<Integer, Integer> jump = new HashMap<>();
+    private final Deque<Integer> stack = new ArrayDeque<>();
     private final CharSequence instructions;
     private final int end;
     private int ip;
@@ -55,10 +63,10 @@ public class BFState implements TruffleObject {
     @ExportMessage
     @SuppressWarnings("unused")
     Object execute(Object[] arguments) throws UnsupportedMessageException {
-        // reset instruction state
+        // 1. reset instruction state
         this.ip = 0;
 
-        // reset data state
+        // 2. reset data state
         switch (arguments.length) {
             case 0 -> {
                 this.data = new long[1024];
@@ -71,6 +79,7 @@ public class BFState implements TruffleObject {
             }
         }
 
+        // 3. run state machine
         return eval();
     }
 
@@ -100,6 +109,54 @@ public class BFState implements TruffleObject {
 
     @CompilerDirectives.TruffleBoundary
     private Object eval() {
+        while (ip < end) {
+            switch (instructions.charAt(ip)) {
+                case '>' -> dp++;
+                case '<' -> dp--;
+                case '+' -> data[dp]++;
+                case '-' -> data[dp]--;
+                case '.' -> System.out.print((char) data[dp]);
+                case ',' -> {
+                    try {
+                        data[dp] = System.in.read();
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                }
+                case '[' -> {
+                    if (!jump.containsKey(ip)) {
+                        stack.addLast(ip);
+                    }
+                    if (data[dp] == 0) {
+                        if (jump.containsKey(ip)) {
+                            ip = jump.get(ip) + 1;
+                            continue;
+                        } else {
+                            while (instructions.charAt(ip) != ']') {
+                                ip++;
+                            }
+
+                            int m = stack.removeLast();
+                            jump.put(m, ip);
+                            jump.put(ip, m);
+                        }
+                    }
+                }
+                case ']' -> {
+                    if (!jump.containsKey(ip)) {
+                        int m = stack.removeLast();
+                        jump.put(m, ip);
+                        jump.put(ip, m);
+                    }
+                    if (data[dp] != 0) {
+                        ip = jump.get(ip) + 1;
+                        continue;
+                    }
+                }
+            }
+            ip++;
+        }
+
         return this.instructions;
     }
 }
