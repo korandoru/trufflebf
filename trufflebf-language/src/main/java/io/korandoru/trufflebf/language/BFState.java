@@ -20,8 +20,8 @@ import java.util.Map;
 public class BFState implements TruffleObject {
 
     // code segment
-    private final Map<Integer, Integer> jump = new HashMap<>();
-    private final Deque<Integer> stack = new ArrayDeque<>();
+    private final Map<Integer, Integer> jump;
+    private final Deque<Integer> stack;
     private final CharSequence instructions;
     private final int end;
     private int ip;
@@ -30,8 +30,11 @@ public class BFState implements TruffleObject {
     private long[] data;
     private int dp;
 
+    @CompilerDirectives.TruffleBoundary
     public BFState(CharSequence instructions) {
         this.instructions = instructions;
+        this.jump = new HashMap<>();
+        this.stack = new ArrayDeque<>();
         this.end = instructions.length();
     }
 
@@ -157,6 +160,6 @@ public class BFState implements TruffleObject {
             ip++;
         }
 
-        return this.instructions;
+        return new BFObject(dp, ip, instructions, data);
     }
 }
