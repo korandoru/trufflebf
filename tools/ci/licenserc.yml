@@ -18,6 +18,7 @@ header:
     copyright-owner: Korandoru Contributors
   paths:
     - '**/*.java'
+    - '**/*.sh'
     - '**/*.xml'
     - '**/*.yml'
   paths-ignore:
