@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Copyright 2022 Korandoru Contributors
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +15,11 @@
 # limitations under the License.
 
 
-if [[ $SL_BUILD_NATIVE == "false" ]]; then
-    echo "Skipping the native image build because SL_BUILD_NATIVE is set to false."
+if [[ $BF_BUILD_NATIVE == "false" ]]; then
+    echo "Skipping the native image build because BF_BUILD_NATIVE is set to false."
     exit 0
 fi
+
 "$JAVA_HOME"/bin/native-image \
     --macro:truffle --no-fallback --initialize-at-build-time \
     -cp ../trufflebf-language/target/bf-language.jar:../trufflebf-launcher/target/bf-launcher.jar \
