@@ -43,3 +43,5 @@ dependency-reduced-pom.xml
 ### Truffle BF ###
 trufflebf-native/bf
 trufflebf-native/bf.build_artifacts.txt
+trufflebf-component/bf-component.jar
+trufflebf-component/component_temp_dir/

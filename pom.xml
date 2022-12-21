@@ -28,6 +28,7 @@
         <module>trufflebf-language</module>
         <module>trufflebf-launcher</module>
         <module>trufflebf-native</module>
+        <module>trufflebf-component</module>
     </modules>
 
     <properties>
