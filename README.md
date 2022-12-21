@@ -21,13 +21,26 @@ mvn package -DskipTests
 gu install -L trufflebf-component/bf-component.jar 
 ```
 
-## Interoperate
-
 After install TruffleBF into GraalVM, you can run the interop examples.
 
-## Interop between GraalVM and TruffleBF
+### Interop between Java and TruffleBF
 
 ```shell
 javac examples/Interop.java
 java examples.Interop
+```
+
+### Interop between JavaScript and TruffleBF
+
+```shell
+gu install nodejs
+node --polyglot --jvm examples/interop.js
+```
+
+### Interop between C and TruffleBF
+
+```shell
+gu install llvm
+clang -g -O1 -c -emit-llvm -I$JAVA_HOME/languages/llvm/include examples/interop.c
+lli --polyglot --jvm interop.bc
 ```
