@@ -44,3 +44,10 @@ gu install llvm
 clang -g -O1 -c -emit-llvm -I$JAVA_HOME/languages/llvm/include examples/interop.c
 lli --polyglot --jvm interop.bc
 ```
+
+### Interop between Ruby and TruffleBF
+
+```
+gu install ruby
+ruby --experimental-options --single-threaded --polyglot --jvm examples/interop.rb
+```

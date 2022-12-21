@@ -68,7 +68,36 @@ public class BFObject implements TruffleObject {
     @ExportMessage
     @SuppressWarnings("unused")
     Object getMembers(boolean includeInternal) {
-        return null;
+        return new Members();
+    }
+
+    @ExportLibrary(InteropLibrary.class)
+    static class Members implements TruffleObject {
+        private final String[] members = {"dp", "ip", "ins", "data"};
+
+        @ExportMessage
+        @SuppressWarnings("unused")
+        boolean hasArrayElements() {
+            return true;
+        }
+
+        @ExportMessage
+        @SuppressWarnings("unused")
+        Object readArrayElement(long index) {
+            return members[(int) index];
+        }
+
+        @ExportMessage
+        @SuppressWarnings("unused")
+        long getArraySize() {
+            return members.length;
+        }
+
+        @ExportMessage
+        @SuppressWarnings("unused")
+        boolean isArrayElementReadable(long index) {
+            return index < members.length;
+        }
     }
 
     @ExportLibrary(InteropLibrary.class)
@@ -137,18 +166,6 @@ public class BFObject implements TruffleObject {
         boolean isArrayElementReadable(long index) {
             return index < length;
         }
-    }
-
-    @ExportMessage
-    @SuppressWarnings("unused")
-    boolean isString() {
-        return true;
-    }
-
-    @ExportMessage
-    @SuppressWarnings("unused")
-    String asString() {
-        return toString();
     }
 
     @ExportMessage

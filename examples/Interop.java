@@ -24,7 +24,7 @@ public class Interop {
             ch = (char)data.getArrayElement(i).asLong();
         }
         System.out.println("!");
-        System.out.println(state.asString());
+        System.out.println(state.toString());
     }
 }
 
