@@ -44,6 +44,7 @@
                             <executable>${basedir}/make_component.sh</executable>
                             <arguments>
                                 <argument>${graalvm.version}</argument>
+                                <argument>${os.detected.arch}</argument>
                             </arguments>
                         </configuration>
                     </execution>

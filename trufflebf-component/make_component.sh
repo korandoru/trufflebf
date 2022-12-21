@@ -14,7 +14,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-declare -r GRAALVM_VERSION="${1:?The argument must be GraalVM version.}"
+declare -r GRAALVM_VERSION="${1:?The first argument must be GraalVM version.}"
+declare -r OS_DETECTED_ARCH="${2:?The second argument must be machine arch.}"
+
+case $OS_DETECTED_ARCH in
+x86_64)
+  OS_RESOLVED_ARCH=amd64
+  ;;
+aarch_64)
+  OS_RESOLVED_ARCH=aarch64
+  ;;
+*)
+  echo "Unsupported arch: $OS_DETECTED_ARCH"
+  exit 1
+esac
+
 readonly COMPONENT_DIR="component_temp_dir"
 readonly LANGUAGE_PATH="$COMPONENT_DIR/languages/bf"
 
@@ -35,7 +49,7 @@ mkdir -p "$COMPONENT_DIR/META-INF"
     echo "Bundle-Name: Truffle BF";
     echo "Bundle-Symbolic-Name: io.korandoru.trufflebf";
     echo "Bundle-Version: $GRAALVM_VERSION";
-    echo "Bundle-RequireCapability: org.graalvm; filter:=\"(&(graalvm_version=$GRAALVM_VERSION)(os_arch=aarch64))\"";
+    echo "Bundle-RequireCapability: org.graalvm; filter:=\"(&(graalvm_version=$GRAALVM_VERSION)(os_arch=$OS_RESOLVED_ARCH))\"";
 } > "$COMPONENT_DIR/META-INF/MANIFEST.MF"
 
 (
