@@ -13,3 +13,10 @@ TruffleBF is a [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) implementati
 mvn clean package -DskipTests
 ./trufflebf-native/bf examples/helloworld.bf
 ```
+
+### Install TruffleBF into GraalVM
+
+```shell
+mvn package -DskipTests
+gu install -L trufflebf-component/bf-component.jar 
+```
