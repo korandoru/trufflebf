@@ -14,9 +14,20 @@ mvn clean package -DskipTests
 ./trufflebf-native/bf examples/helloworld.bf
 ```
 
-### Install TruffleBF into GraalVM
+## Install TruffleBF into GraalVM
 
 ```shell
 mvn package -DskipTests
 gu install -L trufflebf-component/bf-component.jar 
+```
+
+## Interoperate
+
+After install TruffleBF into GraalVM, you can run the interop examples.
+
+## Interop between GraalVM and TruffleBF
+
+```shell
+javac examples/Interop.java
+java examples.Interop
 ```
