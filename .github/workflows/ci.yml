@@ -63,4 +63,4 @@ jobs:
       - name: Build natives
         run: mvn clean package -DskipTests
       - name: Check natives
-        run: ./trufflebf-native/bfnative examples/helloworld.bf
+        run: ./trufflebf-native/bf examples/helloworld.bf

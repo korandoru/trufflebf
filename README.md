@@ -11,5 +11,5 @@ TruffleBF is a [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) implementati
 
 ```shell
 mvn clean package -DskipTests
-./trufflebf-native/bfnative examples/helloworld.bf
+./trufflebf-native/bf examples/helloworld.bf
 ```

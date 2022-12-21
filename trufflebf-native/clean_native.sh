@@ -15,4 +15,4 @@
 # limitations under the License.
 
 
-[ -f bfnative ] && rm bfnative || echo "bfnative not found."
+[ -f bf ] && rm bf || echo "bf not found."

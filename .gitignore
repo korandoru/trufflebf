@@ -41,5 +41,5 @@ build/
 dependency-reduced-pom.xml
 
 ### Truffle BF ###
-trufflebf-native/bfnative
-trufflebf-native/bfnative.build_artifacts.txt
+trufflebf-native/bf
+trufflebf-native/bf.build_artifacts.txt
