@@ -17,7 +17,10 @@ header:
     spdx-id: Apache-2.0
     copyright-owner: Korandoru Contributors
   paths:
+    - '**/*.c'
     - '**/*.java'
+    - '**/*.js'
+    - '**/*.rb'
     - '**/*.sh'
     - '**/*.xml'
     - '**/*.yml'
