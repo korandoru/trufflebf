@@ -55,9 +55,10 @@ public class Interop {
                     .build();
             final StringBuilder builder = new StringBuilder();
             for (int i = 0; i < payload.length(); i++) {
-                builder.append(".>");
+                builder.append(",.");
             }
             Value value = context.eval(BF, builder.toString());
+            value.execute();
             System.out.println(baos.toString());
         }
     }
