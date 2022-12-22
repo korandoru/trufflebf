@@ -15,14 +15,12 @@
   ~ limitations under the License.
 -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.korandoru.trufflebf</groupId>
     <artifactId>trufflebf</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <modules>
         <module>trufflebf-language</module>
@@ -64,7 +62,7 @@
         <connection>scm:git:https://github.com/korandoru/trufflebf.git</connection>
         <developerConnection>scm:git:https://github.com/korandoru/trufflebf.git</developerConnection>
         <url>https://github.com/korandoru/trufflebf</url>
-        <tag>HEAD</tag>
+        <tag>v1.0.0</tag>
     </scm>
 
     <build>
