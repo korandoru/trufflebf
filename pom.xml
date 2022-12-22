@@ -61,8 +61,8 @@
     </developers>
 
     <scm>
-        <connection>scm:git:git://github.com/korandoru/trufflebf.git</connection>
-        <developerConnection>scm:git:ssh://github.com:korandoru/trufflebf.git</developerConnection>
+        <connection>scm:git:https://github.com/korandoru/trufflebf.git</connection>
+        <developerConnection>scm:git:https://github.com/korandoru/trufflebf.git</developerConnection>
         <url>https://github.com/korandoru/trufflebf</url>
         <tag>HEAD</tag>
     </scm>

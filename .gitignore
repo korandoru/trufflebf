@@ -39,6 +39,8 @@ build/
 
 ### Java ###
 dependency-reduced-pom.xml
+pom.xml.releaseBackup
+release.properties
 
 ### Truffle BF ###
 trufflebf-native/bf
