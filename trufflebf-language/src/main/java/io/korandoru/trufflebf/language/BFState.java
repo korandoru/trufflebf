@@ -46,12 +46,16 @@ public class BFState implements TruffleObject {
     private long[] data;
     private int dp;
 
+    // environment
+    private final TruffleLanguage.Env env;
+
     @CompilerDirectives.TruffleBoundary
-    public BFState(CharSequence instructions) {
+    public BFState(CharSequence instructions, TruffleLanguage.Env env) {
         this.instructions = instructions;
         this.jump = new HashMap<>();
         this.stack = new ArrayDeque<>();
         this.end = instructions.length();
+        this.env = env;
     }
 
     @ExportMessage
@@ -127,6 +131,7 @@ public class BFState implements TruffleObject {
     }
 
     @CompilerDirectives.TruffleBoundary
+    @SuppressWarnings("resource")
     private Object eval() {
         while (ip < end) {
             switch (instructions.charAt(ip)) {
@@ -134,10 +139,16 @@ public class BFState implements TruffleObject {
                 case '<' -> dp--;
                 case '+' -> data[dp]++;
                 case '-' -> data[dp]--;
-                case '.' -> System.out.print((char) data[dp]);
+                case '.' -> {
+                    try {
+                        env.out().write((char) data[dp]);
+                    } catch (IOException e) {
+                        throw new UncheckedIOException(e);
+                    }
+                }
                 case ',' -> {
                     try {
-                        data[dp] = System.in.read();
+                        data[dp] = env.in().read();
                     } catch (IOException e) {
                         throw new UncheckedIOException(e);
                     }

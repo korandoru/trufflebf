@@ -33,7 +33,7 @@ import com.oracle.truffle.api.instrumentation.StandardTags;
         StandardTags.RootTag.class
 })
 @SuppressWarnings("unused")
-public class BFLanguage extends TruffleLanguage<Object> {
+public class BFLanguage extends TruffleLanguage<BFContext> {
 
     public static final String ID = "bf";
     public static final String NAME = "BF";
@@ -41,8 +41,8 @@ public class BFLanguage extends TruffleLanguage<Object> {
     public static final String MIME_TYPE = "application/x-bf";
 
     @Override
-    protected Object createContext(Env env) {
-        return null;
+    protected BFContext createContext(Env env) {
+        return new BFContext(env);
     }
 
     @Override
