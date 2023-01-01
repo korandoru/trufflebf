@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2022 Korandoru Contributors
+    Copyright 2022-2023 Korandoru Contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -103,12 +103,16 @@
                                 <include>**/.github</include>
                                 <include>**/.github/**</include>
                             </includes>
+                            <excludes>
+                                <exclude>**/component_temp_dir/**</exclude>
+                                <exclude>interop.bc</exclude>
+                                <exclude>examples/helloworld.bf</exclude>
+                            </excludes>
                         </licenseSet>
                     </licenseSets>
-                    <mapping>
-                        <proto>SLASHSTAR_STYLE</proto>
-                        <toml>SCRIPT_STYLE</toml>
-                    </mapping>
+                    <headerDefinitions>
+                        <headerDefinition>tools/ci/license-header-override-styles.xml</headerDefinition>
+                    </headerDefinitions>
                 </configuration>
                 <dependencies>
                     <dependency>
