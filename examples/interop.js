@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Korandoru Contributors
+ * Copyright 2022-2023 Korandoru Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 const data = [72, 101, 108, 108, 111, 32, 102, 114, 111, 109, 32, 84, 114, 117, 102, 102, 108, 101, 66, 70, 32, 105, 110, 32, 74, 97, 118, 97, 83, 99, 114, 105, 112, 116, 46, 10]
 const program = Polyglot.eval('bf', '.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.>.')
 program(data, 0)
