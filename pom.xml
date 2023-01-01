@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright 2022 Korandoru Contributors
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
+
+    Copyright 2022 Korandoru Contributors
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        https://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
 -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -22,6 +24,9 @@
     <artifactId>trufflebf</artifactId>
     <version>1.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <inceptionYear>2022</inceptionYear>
+
     <modules>
         <module>trufflebf-language</module>
         <module>trufflebf-launcher</module>
@@ -37,6 +42,7 @@
         <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
         <graalvm.version>22.3.0</graalvm.version>
         <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
+        <license-maven-plugin.version>4.2.rc3</license-maven-plugin.version>
         <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
     </properties>
 
@@ -82,6 +88,37 @@
                 <version>${os-maven-plugin.version}</version>
             </extension>
         </extensions>
+        <plugins>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${license-maven-plugin.version}</version>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>tools/ci/license-header-template.txt</header>
+                            <includes>
+                                <!-- Force override the default exclusions -->
+                                <include>**</include>
+                                <include>**/.github</include>
+                                <include>**/.github/**</include>
+                            </includes>
+                        </licenseSet>
+                    </licenseSets>
+                    <mapping>
+                        <proto>SLASHSTAR_STYLE</proto>
+                        <toml>SCRIPT_STYLE</toml>
+                    </mapping>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mycila</groupId>
+                        <artifactId>license-maven-plugin-git</artifactId>
+                        <version>${license-maven-plugin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
     </build>
 
 </project>
