@@ -4,7 +4,7 @@ TruffleBF is a [brainfuck](https://en.wikipedia.org/wiki/Brainfuck) implementati
 
 ## Prerequisites
 
-- [GraalVM 22.3.0](http://www.graalvm.org/docs/getting-started/)
+- [GraalVM for JDK 17](https://www.graalvm.org/jdk17/docs/getting-started/)
 - Maven 3.8.6
 
 ## Build and run
@@ -18,7 +18,7 @@ mvn clean package -DskipTests
 
 ```shell
 mvn package -DskipTests
-gu install -L trufflebf-component/bf-component.jar 
+gu install -L trufflebf-component/bf-component.jar
 ```
 
 After install TruffleBF into GraalVM, you can run the interop examples.

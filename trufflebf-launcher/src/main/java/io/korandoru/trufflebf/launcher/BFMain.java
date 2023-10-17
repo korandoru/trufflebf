@@ -1,11 +1,11 @@
 /*
- * Copyright 2022-2023 Korandoru Contributors
+ * Copyright 2022 Korandoru Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *     https://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -31,7 +31,8 @@ public class BFMain {
     public static void main(String[] args) throws IOException {
         final Source source;
         switch (args.length) {
-            case 0 -> source = Source.newBuilder(BF, new InputStreamReader(System.in), "<stdin>").build();
+            case 0 -> source = Source.newBuilder(BF, new InputStreamReader(System.in), "<stdin>")
+                    .build();
             case 1 -> source = Source.newBuilder(BF, new File(args[0])).build();
             default -> throw new IllegalArgumentException(Arrays.deepToString(args));
         }
@@ -46,5 +47,4 @@ public class BFMain {
             state.execute();
         }
     }
-
 }

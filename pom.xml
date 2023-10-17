@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2022-2023 Korandoru Contributors
+    Copyright 2022 Korandoru Contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-        https://www.apache.org/licenses/LICENSE-2.0
+        http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
@@ -40,10 +40,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <exec-maven-plugin.version>3.1.0</exec-maven-plugin.version>
-        <graalvm.version>22.3.0</graalvm.version>
+        <graalvm.version>23.0.0</graalvm.version>
         <maven-shade-plugin.version>3.4.1</maven-shade-plugin.version>
-        <license-maven-plugin.version>4.2.rc3</license-maven-plugin.version>
         <os-maven-plugin.version>1.7.1</os-maven-plugin.version>
+        <spotless-maven-plugin.version>2.40.0</spotless-maven-plugin.version>
     </properties>
 
     <url>https://github.com/korandoru/zeronos</url>
@@ -79,6 +79,11 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <version>${exec-maven-plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${spotless-maven-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <extensions>
@@ -90,39 +95,42 @@
         </extensions>
         <plugins>
             <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>${license-maven-plugin.version}</version>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
                 <configuration>
-                    <licenseSets>
-                        <licenseSet>
-                            <header>tools/ci/license-header-template.txt</header>
+                    <formats>
+                        <format>
                             <includes>
-                                <!-- Force override the default exclusions -->
-                                <include>**</include>
-                                <include>**/.github</include>
-                                <include>**/.github/**</include>
+                                <include>*.md</include>
+                                <include>.gitignore</include>
+                                <include>pom.xml</include>
                             </includes>
-                            <excludes>
-                                <exclude>**/component_temp_dir/**</exclude>
-                                <exclude>interop.bc</exclude>
-                                <exclude>examples/helloworld.bf</exclude>
-                            </excludes>
-                        </licenseSet>
-                    </licenseSets>
-                    <headerDefinitions>
-                        <headerDefinition>tools/ci/license-header-override-styles.xml</headerDefinition>
-                    </headerDefinitions>
+                            <trimTrailingWhitespace />
+                            <endWithNewline />
+                            <indent>
+                                <spaces>true</spaces>
+                                <spacesPerTab>4</spacesPerTab>
+                            </indent>
+                        </format>
+                    </formats>
+                    <java>
+                        <palantirJavaFormat>
+                            <version>2.38.0</version>
+                        </palantirJavaFormat>
+                        <!-- static imports first, then others, no blank lines  -->
+                        <importOrder>
+                            <order>\#|</order>
+                        </importOrder>
+                        <removeUnusedImports />
+                        <trimTrailingWhitespace />
+                        <endWithNewline />
+                        <indent>
+                            <spaces>true</spaces>
+                            <spacesPerTab>4</spacesPerTab>
+                        </indent>
+                    </java>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.mycila</groupId>
-                        <artifactId>license-maven-plugin-git</artifactId>
-                        <version>${license-maven-plugin.version}</version>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
     </build>
-
 </project>
