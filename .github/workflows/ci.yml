@@ -42,9 +42,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Check license header
-        uses: korandoru/hawkeye@v3
+        uses: korandoru/hawkeye@v4
       - name: Setup Java
         uses: graalvm/setup-graalvm@v1
         with:
@@ -60,7 +60,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Java
         uses: graalvm/setup-graalvm@v1
         with:
