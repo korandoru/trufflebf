@@ -28,6 +28,19 @@
     <artifactId>trufflebf-native</artifactId>
     <packaging>pom</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>trufflebf-language</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>trufflebf-launcher</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
@@ -41,7 +54,16 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>${basedir}/make_native.sh</executable>
+                            <executable>
+                                ${env.JAVA_HOME}/bin/native-image</executable>
+                            <commandlineArgs>
+                                --no-fallback
+                                --initialize-at-build-time
+                                -p %classpath
+                                -H:+ReportExceptionStackTraces
+                                io.korandoru.trufflebf.launcher.BFMain
+                                -o ${project.basedir}/bf
+                            </commandlineArgs>
                         </configuration>
                     </execution>
                     <execution>
