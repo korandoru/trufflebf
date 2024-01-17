@@ -42,13 +42,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Check license header
-        uses: korandoru/hawkeye@v3
+        uses: korandoru/hawkeye@v4
       - name: Setup Java
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'graalvm'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check codestyle
@@ -60,13 +60,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup Java
         uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '17'
+          java-version: '21'
           distribution: 'graalvm'
-          components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build and check
         run: mvn clean package -DskipTests
