@@ -54,7 +54,11 @@
                                     <exclude>com.oracle.truffle:truffle-api</exclude>
                                     <exclude>com.oracle.truffle:truffle-dsl-processor</exclude>
                                     <exclude>com.oracle.truffle:truffle-tck</exclude>
+                                    <exclude>org.graalvm.polyglot:polyglot</exclude>
+                                    <exclude>org.graalvm.sdk:collections</exclude>
                                     <exclude>org.graalvm.sdk:graal-sdk</exclude>
+                                    <exclude>org.graalvm.sdk:nativeimage</exclude>
+                                    <exclude>org.graalvm.sdk:word</exclude>
                                 </excludes>
                             </artifactSet>
                         </configuration>
